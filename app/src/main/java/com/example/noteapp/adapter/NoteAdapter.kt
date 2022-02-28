@@ -9,13 +9,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.noteapp.R
 import com.example.noteapp.model.Note
 
-class NoteAdapter(private val notes: ArrayList<Note>) : RecyclerView.Adapter<NoteAdapter.NoteVH>() {
+class NoteAdapter(val notes: ArrayList<Note>) : RecyclerView.Adapter<NoteAdapter.NoteVH>() {
 
     inner class NoteVH(private val view: View) : RecyclerView.ViewHolder(view) {
         fun bind() {
-            view.findViewById<TextView>(R.id.tvDate).text = notes[adapterPosition].date
-            view.findViewById<TextView>(R.id.tvDescription).text =
-                notes[adapterPosition].description
+            val note: Note = notes[adapterPosition]
+            if (note.date == null) {
+                view.findViewById<TextView>(R.id.tvDescription).text = "Good note app)))"
+            }
+            view.findViewById<TextView>(R.id.tvDate).text = note.date
+            view.findViewById<TextView>(R.id.tvDescription).text = note.description
+
         }
 
     }

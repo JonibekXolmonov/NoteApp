@@ -7,9 +7,12 @@ import android.widget.EditText
 import android.widget.TextView
 import com.example.noteapp.R
 import com.example.noteapp.adapter.NoteAdapter
+import com.example.noteapp.manager.SharedPref
 import com.example.noteapp.model.Note
 
 class ViewDialog(private val context: Context) {
+
+    private val sharedPref: SharedPref = SharedPref(context)
 
     fun openNewNoteDialog(noteAdapter: NoteAdapter) {
         val dialog = Dialog(context)
@@ -29,6 +32,7 @@ class ViewDialog(private val context: Context) {
 
         tvSave.setOnClickListener {
             noteAdapter.addNote(Note("March 1", edtNewNote.text.toString()))
+            sharedPref.saveNotes(noteAdapter.notes)
             dialog.dismiss()
         }
 
